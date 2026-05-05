@@ -1,0 +1,112 @@
+@startuml for 2048 Game
+' ==== MODEL ====
+class Tile {
+  - value : int
+  + getValue() : int
+  + setValue(int) : void
+  + isEmpty() : boolean
+}
+
+enum Direction {
+  UP
+  DOWN
+  LEFT
+  RIGHT
+}
+
+class Grid {
+  - tiles : Tile[][]
+  + move(Direction) : int
+  + addRandomTile() : void
+  + isFull() : boolean
+  + canMove() : boolean
+}
+
+class Game {
+  - grid : Grid
+  - score : int
+  - player : Player
+  + start() : void
+  + checkWin() : boolean
+  + checkLose() : boolean
+  + updateScore(int) : void
+  + getScore() : int
+}
+
+class Player {
+  - name : String
+  - score : int
+  + getName() : String
+  + getScore() : int
+}
+
+class DatabaseManager {
+  + saveScore(Player) : void
+  + getHighScores() : List<Player>
+}
+
+' ==== VIEW ====
+class GameView {
+  + render(Grid) : void
+}
+
+class GamePanel {
+  - scoreLabel : JLabel
+  - gameView : GameView
+  - newGameButton : JButton
+  - resetButton : JButton
+  - saveButton : JButton
+  + setScore(int) : void
+  + getNewGameButton() : JButton
+  + getResetButton() : JButton
+  + getSaveButton() : JButton
+  + getGameView() : GameView
+}
+
+class TileView {
+  + display(Tile) : void
+}
+
+class ScoreBoardView {
+  + showScores(List<Player>) : void
+}
+
+class MenuView {
+  + showMenu() : void
+}
+
+' ==== CONTROLLER ====
+class GameController {
+  - game : Game
+  - view : GameView
+  + handleKeyPress(Direction) : void
+  + updateScore(int) : void
+  + getView() : GameView
+  + getGame() : Game
+}
+
+class MenuController {
+  - menuView : MenuView
+  + startGame() : void
+  + showScores() : void
+}
+
+class DatabaseController {
+  - dbManager : DatabaseManager
+  + save(Player) : void
+  + loadScores() : List<Player>
+}
+
+' ==== RELATIONS ====
+Game --> Grid
+Game --> Player
+GameController --> Game
+GameController --> GameView
+GamePanel --> GameView
+GamePanel --> GameController
+MenuController --> MenuView
+DatabaseController --> DatabaseManager
+GameView --> TileView
+GameView --> ScoreBoardView
+DatabaseManager --> Player
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+actor Joueur
+
+Joueur -> GameController : appuie sur une touche (Direction)
+GameController -> Game : handleKeyPress(Direction)
+Game -> Grid : move(Direction)
+Grid -> Grid : mergeTiles(Direction)
+Grid -> Grid : addRandomTile()
+Grid --> Game : retourne état de la grille
+
+Game -> Game : updateScore(points)
+Game --> GameController : état mis à jour
+
+GameController -> GameView : updateView(Grid, Score)
+GameView -> TileView : display(Tile[])
+GameView -> ScoreBoardView : updateScore(Score)
+
+GameController -> Game : checkWin()
+GameController -> Game : checkLose()
+Game --> GameController : résultat (victoire/défaite)
+
+GameController -> GameView : afficher message victoire/défaite
+GameController -> DatabaseController : save(Player)
+DatabaseController -> DatabaseManager : saveScore(Player)
+DatabaseManager --> DatabaseController : confirmation
+@enduml

@@ -19,7 +19,7 @@ public class Main {
         JFrame frame = new JFrame("Jeu 2048");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setContentPane(gamePanel);
-        frame.setSize(500, 560);
+        frame.setSize(500, 500);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

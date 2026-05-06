@@ -14,7 +14,7 @@ public class GamePanel extends JPanel {
     private JButton saveButton;
     private JButton scoresButton;
 
-    public GamePanel(Game game, GameController controller, DatabaseManager dbManager) {
+    public GamePanel(Game game, GameController controller, String bestScoreText) {
         setLayout(new BorderLayout());
 
         // Panneau du haut : score actuel + meilleur score
@@ -22,11 +22,7 @@ public class GamePanel extends JPanel {
         scoreLabel = new JLabel("Score : 0", SwingConstants.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
-        Player top = dbManager.getTopPlayer();
-        String bestText = top != null
-            ? "Meilleur score : " + top.getScore() + " (" + top.getName() + ")"
-            : "Meilleur score : ---";
-        bestScoreLabel = new JLabel(bestText, SwingConstants.CENTER);
+        bestScoreLabel = new JLabel(bestScoreText, SwingConstants.CENTER);
         bestScoreLabel.setFont(new Font("Arial", Font.ITALIC, 13));
         bestScoreLabel.setForeground(new Color(180, 80, 0));
 
@@ -55,11 +51,8 @@ public class GamePanel extends JPanel {
         scoreLabel.setText("Score : " + score);
     }
 
-    public void updateBestScore(DatabaseManager dbManager) {
-        Player top = dbManager.getTopPlayer();
-        if (top != null) {
-            bestScoreLabel.setText("Meilleur score : " + top.getScore() + " (" + top.getName() + ")");
-        }
+    public void setBestScoreText(String text) {
+        bestScoreLabel.setText(text);
     }
 
     public JButton getNewGameButton() { return newGameButton; }

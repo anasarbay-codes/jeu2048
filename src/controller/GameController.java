@@ -22,7 +22,7 @@ public class GameController {
         game.updateScore(points);
     }
 
-    public void handleKeyPress(Direction dir) {
+    public void handleKeyPress(Direction dir) throws Exception {
         int res = game.getGrid().move(dir);
         if (res >= 0) {
             if (res > 0) updateScore(res);

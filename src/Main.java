@@ -19,7 +19,7 @@ public class Main {
         JFrame frame = new JFrame("Jeu 2048");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setContentPane(gamePanel);
-        frame.setSize(430, 560);
+        frame.setSize(500, 560);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -27,7 +27,7 @@ public class Main {
         // Fermeture propre de la BD
         Runtime.getRuntime().addShutdownHook(new Thread(dbManager::close));
 
-        // Touches clavier
+        
         gamePanel.getGameView().addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyPressed(java.awt.event.KeyEvent evt) {

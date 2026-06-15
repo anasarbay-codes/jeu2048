@@ -20,7 +20,7 @@ Implementation of the 2048 game in Java.
 ```bash
 mvn clean compile
 mvn exec:java
-
+```
 
 ## Screenshot
 
